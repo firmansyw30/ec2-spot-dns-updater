@@ -2,7 +2,7 @@
 # ============================================================
 # Cross-Distro NGINX Installation Script
 # Works on: Debian/Ubuntu, CentOS/RHEL, Fedora
-# Author: Your Name
+# Author: Firmansyah Wicaksono
 # ============================================================
 
 set -e  # Exit on error
@@ -70,6 +70,10 @@ esac
 print_success "Enabling and starting NGINX..."
 systemctl enable nginx
 systemctl start nginx
+
+# Check IP Address
+print_success "Printing Your Server IP"
+curl ifconfig.me
 
 # --- Verify Service ---
 if systemctl is-active --quiet nginx; then
