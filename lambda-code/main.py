@@ -11,7 +11,7 @@ route53 = boto3.client('route53')
 def lambda_handler(event, context):
     try:
         # 1. Get Configuration
-        hosted_zone_id = os.environ['HOSTED_ZONE_ID']
+        hosted_zone_id = os.environ['HOSTED_ZONE_ID'] # Set Environment Variable in AWS Lambda Console
         subdomains_env = os.environ['SUBDOMAIN_LIST']
         subdomains = [s.strip() for s in subdomains_env.split(',')]
         
@@ -37,7 +37,7 @@ def lambda_handler(event, context):
 
         # --- GATEKEEPER CHECK ---
         tags = {t['Key']: t['Value'] for t in instance.get('Tags', [])}
-        target_tag_value = 'monitoring-instance' # Ensure this matches your EC2 tag exactly
+        target_tag_value = '<your-ec2-instance-tag>' # Ensure this matches your EC2 tag exactly
         
         # Use .get() safely to avoid errors if 'Name' tag is missing
         current_name = tags.get('Name', 'Unknown')
